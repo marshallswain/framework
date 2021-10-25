@@ -51,6 +51,9 @@ export default defineNuxtModule({
       await setupAutoImports()
     }
     if (opts.vite) {
+      nuxt.hook('prepare:types', (opts) => {
+        opts.references.push({ types: 'vite/client' })
+      })
       await installModule(nuxt, _require.resolve('nuxt-vite'))
     }
     if (opts.postcss8) {
